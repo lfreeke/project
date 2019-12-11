@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_project_decision_tree" model="ir.ui.view">
+        <field name="name">project.decision.tree</field>
+        <field name="model">project.decision</field>
+        <field name="arch" type="xml">
+            <tree string="decision log">
+                <field name="decision_date"/>
+                <field name="decision_summary"/>
+                <field name="project_id"/>
+                <field name="agreed_by_customer"/>
+                <field name="agreed_by_pm"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_project_decision_form" model="ir.ui.view">
+        <field name="name">project.decision.form</field>
+        <field name="model">project.decision</field>
+        <field name="arch" type="xml">
+            <form string="decision">
+                <sheet>
+                    <group col="4">
+                        <field name="project_id"/>
+                        <field name="decision_date"/>
+                    </group>
+                    <group col="4">
+                        <field name="decision_summary"/>
+                        <field name="decision_log"/>
+                    </group>
+                    <group>
+                        <field name="agreed_by_customer"/>
+                        <field name="agreed_by_pm"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_project_decision" model="ir.actions.act_window">
+        <field name="name">Project decision</field>
+        <field name="res_model">project.decision</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+        name="Decision log"
+        id="menu_project_decision"
+        parent="project.menu_main_pm"
+        sequence="70"
+        />
+
+    <menuitem
+        name="Log"
+        id="project_decision_log"
+        parent="menu_project_decision"
+        action="act_project_decision"
+        />
+
+
+
+</odoo>
